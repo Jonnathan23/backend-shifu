@@ -1,20 +1,23 @@
 import { Table, Column, Model, DataType, PrimaryKey } from 'sequelize-typescript'
 
 @Table({
-    tableName: 'Estado_puerta',
+    tableName: 'Usuarios',
     timestamps: false
 })
 
-class Estado extends Model {
+class User extends Model {
     @Column({
         type: DataType.INTEGER,
         primaryKey: true,
         autoIncrement: true,
     })
     declare id: number;
+    
+    @Column({ type: DataType.STRING(150) })
+    username!: string
 
-    @Column({ type: DataType.INTEGER })
-    descripcion!: number
+    @Column({ type: DataType.STRING(100) })
+    password!: string
 }
 
-export default Estado
+export default User

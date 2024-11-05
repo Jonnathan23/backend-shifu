@@ -19,6 +19,7 @@ conectDb()
 const server = express()
 
 
-server.use('/po/estado', router)
-//server.use('/proyecto', router)
+server.use(express.json())
+server.use('/shifu/po', router)
+
 export default server
