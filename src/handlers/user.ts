@@ -1,18 +1,15 @@
 import {Request, Response} from 'express'
-import {validationResult} from 'express-validator'
+
 import User from '../models/User.models'
 
 
-export const createUser = async (req:Request, res: Response) => {
-    
-   
-    let errors = validationResult(req)
-    if(!errors.isEmpty()){
-        res.status(400).json({errors:errors.array()})
-        return
+export const createUser = async (req:Request, res: Response) => {  
+    try {
+        const user = await User.create(req.body)   
+        res.json({data: user})
+        
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({errors:'Error al crear usuario'})
     }
-
-    const user = await User.create(req.body)   
-
-    res.json({data: user})
 }
