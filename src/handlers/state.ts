@@ -1,6 +1,16 @@
 import {Request, Response} from 'express'
 import Estado from '../models/Estado.models'
 
+export const getState = async (req:Request, res: Response) => {
+    try {
+        const users = await Estado.findAll()
+        res.json({data: users})
+    } catch (error) {
+        
+    }
+}
+
+
 export const createState = async(req:Request, res:Response) => {
     try {
         const state = await Estado.create(req.body)
