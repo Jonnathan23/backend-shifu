@@ -2,16 +2,14 @@ import { Router } from "express";
 import { body } from "express-validator";
 import { createUser, getUsers } from "./handlers/user";
 import { handleInputErrors } from "./middleware";
-import { createState, getState } from "./handlers/state";
+import { createState, getState, updateState } from "./handlers/state";
 
 const router = Router()
 //* State
 router.get('/state', getState)
 
 
-router.patch('/state', (req, res) => {
-    res.json('Desde el PUT')
-})
+router.patch('/state', updateState)
 
 router.post('/state',
     body('descripcion')
