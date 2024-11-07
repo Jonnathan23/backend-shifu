@@ -4,7 +4,7 @@ import dotenv from 'dotenv'
 dotenv.config()
 
 const db = new Sequelize(process.env.DB_RENDER!, {
-    models: [__dirname + '/../models/**/*.ts']
+    models: [__dirname + '/../models/**/*']
 })
 
 export default db
