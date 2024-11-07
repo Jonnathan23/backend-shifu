@@ -1,8 +1,9 @@
 import express from "express"
-import router from "./routes"
+import router from "./routes/routes"
 import db from "./config/db"
+import cors from 'cors';
 
-async function conectDb(){
+async function conectDb() {
     try {
         await db.authenticate()
         db.sync()
@@ -18,7 +19,7 @@ async function conectDb(){
 conectDb()
 const server = express()
 
-
+server.use(cors())
 server.use(express.json())
 server.use('/shifu/po', router)
 

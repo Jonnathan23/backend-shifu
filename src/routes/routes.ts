@@ -1,8 +1,8 @@
 import { Router } from "express";
 import { body } from "express-validator";
-import { createUser, getUsers } from "./handlers/user";
-import { handleInputErrors } from "./middleware";
-import { createState, getState, updateState } from "./handlers/state";
+import { createUser, getUsers } from "../handlers/user";
+import { handleInputErrors } from "../middleware";
+import { createState, getState, updateState } from "../handlers/state";
 
 const router = Router()
 //* State
@@ -15,12 +15,12 @@ router.post('/state',
     body('descripcion')
         .notEmpty().withMessage('El estado no puede estar vacio')
         .isNumeric().withMessage('Solo numeros')
-        .custom(value => {            
+        .custom(value => {
             const numValue = Number(value);
             return numValue === 0 || numValue === 1;
         }).withMessage('Valores no permitidos, solo se permiten 0 o 1'),
-        handleInputErrors,
-        createState
+    handleInputErrors,
+    createState
 )
 
 //*Users
