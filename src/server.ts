@@ -1,5 +1,6 @@
 import express from "express"
 import router from "./routes/routes"
+import { router as authRouter } from "./routes/auth.routes"
 import db from "./config/db"
 import cors from 'cors';
 
@@ -21,6 +22,10 @@ const server = express()
 
 server.use(cors())
 server.use(express.json())
+
 server.use('/shifu/po', router)
+server.use('/shifu/auth', authRouter)
+
+
 
 export default server

@@ -1,15 +1,14 @@
 import { Router } from "express";
 import { body } from "express-validator";
-import { createUser, getUsers } from "../handlers/user";
+
 import { handleInputErrors } from "../middleware";
-import { createState, getState, updateState } from "../handlers/state";
+import { StateController } from "../controllers/State.controller";
 
 const router = Router()
-//* State
-router.get('/state', getState)
 
+router.get('/state', StateController.getState)
 
-router.patch('/state', updateState)
+router.patch('/state', StateController.updateState)
 
 router.post('/state',
     body('descripcion')
@@ -20,21 +19,7 @@ router.post('/state',
             return numValue === 0 || numValue === 1;
         }).withMessage('Valores no permitidos, solo se permiten 0 o 1'),
     handleInputErrors,
-    createState
-)
-
-//*Users
-
-
-router.get('/user', getUsers)
-
-router.post('/user',
-    body('username').notEmpty().withMessage('El usuario no puede ir vacio'),
-    body('password')
-        .notEmpty().withMessage('La contraseña no puede ir vacia')
-        .isLength({ min: 6 }).withMessage('La contraseña debe tener al menos 6 caracteres'),
-    handleInputErrors,
-    createUser
+    StateController.createState
 )
 
 export default router
