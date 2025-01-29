@@ -8,10 +8,16 @@ export class StateController {
         try {
             const states = await Estado.findAll()
 
+            console.log('\n -----------| | States | |------------')
+            console.log(states)
+            console.log(!states)
             if (!states) {
                 res.status(200).json({ data: [] })
+                return
             }
-            res.status(200).json({ data: states[0] })
+            console.log(states.length)
+            states.length ? res.status(200).json({ data: states[0] }) : res.status(200).json({ data: [] })
+            //res.status(200).json({ data: states[0] })
         } catch (error) {
             res.status(500).json({ errors: 'Error al obtener los datos' })
         }
